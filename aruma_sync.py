@@ -244,81 +244,86 @@ class ArumaScraper:
                 try: f.unlink()
                 except: pass
             
-            # ESTRATEGIA HTTP: capturar la respuesta del POST con el archivo
-            # Esto funciona mejor en GitHub Actions y con ASP.NET postbacks
-            response_holder = {"file": None, "filename": None, "url": None}
+            # ESTRATEGIA: extraer cookies + viewstate y hacer POST con requests
+            # ASP.NET requiere ViewState, EventValidation, etc. para el postback
+            log("Extrayendo cookies de sesión...")
+            cookies = self.context.cookies()
+            cookies_dict = {c["name"]: c["value"] for c in cookies}
+            log(f"  {len(cookies_dict)} cookies obtenidas")
             
-            def handle_response(response):
-                if response_holder["file"] is not None:
-                    return  # ya capturamos uno
-                try:
-                    headers = response.headers
-                    cd = headers.get("content-disposition", "") or headers.get("Content-Disposition", "")
-                    if cd and ("attachment" in cd.lower() or "filename" in cd.lower()):
-                        # Leer body INMEDIATAMENTE antes de que Playwright lo descarte
-                        try:
-                            body = response.body()
-                        except Exception as be:
-                            log(f"  No se pudo leer body inmediato: {be}")
-                            return
-                        
-                        m = re.search(r'filename[^;=\n]*=(?:UTF-8\'\')?(["\']?)([^"\';\n]*)\1', cd)
-                        filename = m.group(2) if m else f"ventas_{int(time.time())}.txt"
-                        response_holder["filename"] = filename
-                        response_holder["file"] = body
-                        response_holder["url"] = response.url
-                        log(f"  ✓ Capturado: {filename} ({len(body)} bytes)")
-                except Exception as e:
-                    log(f"  Error en handler: {e}")
+            # Extraer campos hidden del form de la página actual
+            log("Extrayendo campos hidden del form...")
+            hidden_fields = self.page.evaluate("""
+                () => {
+                    const inputs = document.querySelectorAll('input[type=hidden]');
+                    const data = {};
+                    inputs.forEach(i => { if(i.name) data[i.name] = i.value; });
+                    return data;
+                }
+            """)
+            log(f"  {len(hidden_fields)} campos hidden")
             
-            self.page.on("response", handle_response)
+            # Agregar el campo del botón Exportar
+            hidden_fields["ctl00$MainContent$btnExportar"] = "Exportar"
             
-            # Localizar y clickear el botón Exportar
-            exportar = self.page.locator("#MainContent_btnExportar").first
-            if exportar.count() == 0:
-                exportar = self.page.locator(
-                    "input[value*='xport' i]:visible, button:has-text('Exportar'):visible"
-                ).first
+            # Hacer el POST con requests usando las cookies
+            log("Enviando POST a la URL de ventas...")
+            session = requests.Session()
+            for k, v in cookies_dict.items():
+                session.cookies.set(k, v)
             
-            if exportar.count() == 0:
-                log("⚠ No se encontró botón Exportar", "⚠")
-                return None
+            user_agent = self.page.evaluate("() => navigator.userAgent")
             
-            log("Click en Exportar...")
+            res = session.post(
+                VENTAS_URL,
+                data=hidden_fields,
+                headers={
+                    "User-Agent": user_agent,
+                    "Referer": VENTAS_URL,
+                    "Origin": LOGIN_URL.rstrip("/"),
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                },
+                timeout=180,
+                allow_redirects=True
+            )
             
-            # ASP.NET hace postback - puede que el click "fall" porque la página se recarga
-            try:
-                exportar.click(timeout=5000)
-            except Exception as ce:
-                log(f"  Click falló (normal en ASP.NET postback): {ce}")
+            log(f"  Respuesta HTTP: {res.status_code}, {len(res.content)} bytes")
             
-            # Esperar respuesta
-            log("  Esperando respuesta del servidor (hasta 90s)...")
-            for i in range(90):
-                time.sleep(1)
-                if response_holder["file"]:
-                    break
-                if i % 15 == 14:
-                    log(f"    {i+1}s esperando...")
+            # Verificar Content-Disposition
+            cd = res.headers.get("Content-Disposition", "") or res.headers.get("content-disposition", "")
+            content_type = res.headers.get("Content-Type", "")
+            log(f"  Content-Type: {content_type}")
+            log(f"  Content-Disposition: {cd or '(vacío)'}")
             
-            try:
-                self.page.remove_listener("response", handle_response)
-            except:
-                pass
-            
-            if response_holder["file"]:
-                filename = response_holder["filename"] or "ventas.txt"
+            if cd and ("attachment" in cd.lower() or "filename" in cd.lower()):
+                m = re.search(r'filename[^;=\n]*=(?:UTF-8\'\')?(["\']?)([^"\';\n]*)\1', cd)
+                filename = m.group(2) if m else f"ventas_{int(time.time())}.txt"
                 target_path = DOWNLOAD_DIR / filename
                 with open(target_path, "wb") as f:
-                    f.write(response_holder["file"])
-                log(f"✓ Guardado: {filename} ({len(response_holder['file'])} bytes)", "✓")
+                    f.write(res.content)
+                log(f"✓ Guardado: {filename} ({len(res.content)} bytes)", "✓")
                 return target_path
             
-            log("⚠ No se pudo capturar el archivo", "⚠")
+            # Si no hay attachment, ver si el contenido parece ser el archivo (texto con pipes)
+            preview = res.content[:500].decode("utf-8", errors="replace")
+            log(f"  Preview: {preview[:300]}")
+            
+            if "C.O." in preview and "|" in preview and "FECHA" in preview:
+                # Es el archivo aunque sin Content-Disposition
+                filename = f"ventas_{int(time.time())}.txt"
+                target_path = DOWNLOAD_DIR / filename
+                with open(target_path, "wb") as f:
+                    f.write(res.content)
+                log(f"✓ Guardado (sin attachment header): {filename}", "✓")
+                return target_path
+            
+            log("⚠ La respuesta no contiene un archivo de ventas", "⚠")
             return None
             
         except Exception as e:
             log(f"Error descargando: {e}", "⚠")
+            import traceback
+            log(traceback.format_exc())
             return None
 
 
