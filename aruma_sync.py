@@ -241,28 +241,82 @@ class ArumaScraper:
         try:
             exportar = self.page.locator(
                 "input[value*='xport' i]:visible, button:has-text('Exportar'):visible, "
-                "a:has-text('Exportar'):visible"
+                "a:has-text('Exportar'):visible, #MainContent_btnExportar"
             ).first
             
             if exportar.count() == 0:
                 log("⚠ No se encontró botón Exportar", "⚠")
                 return None
             
-            log("Click en Exportar...")
-            
             DOWNLOAD_DIR.mkdir(exist_ok=True)
             for f in DOWNLOAD_DIR.glob("*"):
                 try: f.unlink()
                 except: pass
             
-            with self.page.expect_download(timeout=60000) as dl_info:
+            # ESTRATEGIA 1: intentar con expect_download (estándar)
+            log("Intentando descarga estándar...")
+            try:
+                with self.page.expect_download(timeout=15000) as dl_info:
+                    exportar.click()
+                download = dl_info.value
+                target_path = DOWNLOAD_DIR / download.suggested_filename
+                download.save_as(str(target_path))
+                log(f"✓ Descargado: {download.suggested_filename}", "✓")
+                return target_path
+            except PlaywrightTimeout:
+                log("  Download estándar no funcionó, intentando captura HTTP...")
+            
+            # ESTRATEGIA 2: capturar respuesta HTTP del postback ASP.NET
+            # ASP.NET típicamente regresa el archivo en la respuesta del POST
+            response_holder = {"file": None, "filename": None}
+            
+            def handle_response(response):
+                try:
+                    # Buscar respuestas con Content-Disposition: attachment
+                    headers = response.headers
+                    cd = headers.get("content-disposition", "")
+                    if "attachment" in cd.lower() or "filename" in cd.lower():
+                        log(f"  Respuesta con archivo detectada: {response.url}")
+                        # Extraer filename
+                        m = re.search(r'filename[^;=\n]*=(?:UTF-8\'\')?(["\']?)([^"\';\n]*)\1', cd)
+                        filename = m.group(2) if m else f"ventas_{int(time.time())}.txt"
+                        response_holder["filename"] = filename
+                        response_holder["file"] = response.body()
+                except Exception as e:
+                    log(f"  Error en handler: {e}")
+            
+            self.page.on("response", handle_response)
+            
+            # Click en exportar
+            try:
+                exportar.click()
+            except:
+                # Si el click ya se hizo en el primer intento, recargar y volver a clickear
+                self.page.goto(VENTAS_URL, wait_until="domcontentloaded")
+                time.sleep(3)
+                exportar = self.page.locator("#MainContent_btnExportar").first
                 exportar.click()
             
-            download = dl_info.value
-            target_path = DOWNLOAD_DIR / download.suggested_filename
-            download.save_as(str(target_path))
-            log(f"✓ Descargado: {download.suggested_filename}", "✓")
-            return target_path
+            log("  Esperando respuesta del servidor...")
+            # Esperar hasta 60 segundos a que llegue el archivo
+            for _ in range(60):
+                time.sleep(1)
+                if response_holder["file"]:
+                    break
+            
+            self.page.remove_listener("response", handle_response)
+            
+            if response_holder["file"]:
+                filename = response_holder["filename"] or "ventas.txt"
+                target_path = DOWNLOAD_DIR / filename
+                with open(target_path, "wb") as f:
+                    f.write(response_holder["file"])
+                log(f"✓ Descargado vía HTTP: {filename} ({len(response_holder['file'])} bytes)", "✓")
+                return target_path
+            
+            log("⚠ No se pudo capturar el archivo", "⚠")
+            return None
+            
         except Exception as e:
             log(f"Error descargando: {e}", "⚠")
             return None
