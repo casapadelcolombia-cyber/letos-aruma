@@ -239,79 +239,79 @@ class ArumaScraper:
         log(f"URL: {self.page.url}")
         
         try:
-            exportar = self.page.locator(
-                "input[value*='xport' i]:visible, button:has-text('Exportar'):visible, "
-                "a:has-text('Exportar'):visible, #MainContent_btnExportar"
-            ).first
-            
-            if exportar.count() == 0:
-                log("⚠ No se encontró botón Exportar", "⚠")
-                return None
-            
             DOWNLOAD_DIR.mkdir(exist_ok=True)
             for f in DOWNLOAD_DIR.glob("*"):
                 try: f.unlink()
                 except: pass
             
-            # ESTRATEGIA 1: intentar con expect_download (estándar)
-            log("Intentando descarga estándar...")
-            try:
-                with self.page.expect_download(timeout=15000) as dl_info:
-                    exportar.click()
-                download = dl_info.value
-                target_path = DOWNLOAD_DIR / download.suggested_filename
-                download.save_as(str(target_path))
-                log(f"✓ Descargado: {download.suggested_filename}", "✓")
-                return target_path
-            except PlaywrightTimeout:
-                log("  Download estándar no funcionó, intentando captura HTTP...")
-            
-            # ESTRATEGIA 2: capturar respuesta HTTP del postback ASP.NET
-            # ASP.NET típicamente regresa el archivo en la respuesta del POST
-            response_holder = {"file": None, "filename": None}
+            # ESTRATEGIA HTTP: capturar la respuesta del POST con el archivo
+            # Esto funciona mejor en GitHub Actions y con ASP.NET postbacks
+            response_holder = {"file": None, "filename": None, "url": None}
             
             def handle_response(response):
+                if response_holder["file"] is not None:
+                    return  # ya capturamos uno
                 try:
-                    # Buscar respuestas con Content-Disposition: attachment
                     headers = response.headers
-                    cd = headers.get("content-disposition", "")
-                    if "attachment" in cd.lower() or "filename" in cd.lower():
-                        log(f"  Respuesta con archivo detectada: {response.url}")
-                        # Extraer filename
+                    cd = headers.get("content-disposition", "") or headers.get("Content-Disposition", "")
+                    if cd and ("attachment" in cd.lower() or "filename" in cd.lower()):
+                        # Leer body INMEDIATAMENTE antes de que Playwright lo descarte
+                        try:
+                            body = response.body()
+                        except Exception as be:
+                            log(f"  No se pudo leer body inmediato: {be}")
+                            return
+                        
                         m = re.search(r'filename[^;=\n]*=(?:UTF-8\'\')?(["\']?)([^"\';\n]*)\1', cd)
                         filename = m.group(2) if m else f"ventas_{int(time.time())}.txt"
                         response_holder["filename"] = filename
-                        response_holder["file"] = response.body()
+                        response_holder["file"] = body
+                        response_holder["url"] = response.url
+                        log(f"  ✓ Capturado: {filename} ({len(body)} bytes)")
                 except Exception as e:
                     log(f"  Error en handler: {e}")
             
             self.page.on("response", handle_response)
             
-            # Click en exportar
-            try:
-                exportar.click()
-            except:
-                # Si el click ya se hizo en el primer intento, recargar y volver a clickear
-                self.page.goto(VENTAS_URL, wait_until="domcontentloaded")
-                time.sleep(3)
-                exportar = self.page.locator("#MainContent_btnExportar").first
-                exportar.click()
+            # Localizar y clickear el botón Exportar
+            exportar = self.page.locator("#MainContent_btnExportar").first
+            if exportar.count() == 0:
+                exportar = self.page.locator(
+                    "input[value*='xport' i]:visible, button:has-text('Exportar'):visible"
+                ).first
             
-            log("  Esperando respuesta del servidor...")
-            # Esperar hasta 60 segundos a que llegue el archivo
-            for _ in range(60):
+            if exportar.count() == 0:
+                log("⚠ No se encontró botón Exportar", "⚠")
+                return None
+            
+            log("Click en Exportar...")
+            
+            # ASP.NET hace postback - puede que el click "fall" porque la página se recarga
+            try:
+                exportar.click(timeout=5000)
+            except Exception as ce:
+                log(f"  Click falló (normal en ASP.NET postback): {ce}")
+            
+            # Esperar respuesta
+            log("  Esperando respuesta del servidor (hasta 90s)...")
+            for i in range(90):
                 time.sleep(1)
                 if response_holder["file"]:
                     break
+                if i % 15 == 14:
+                    log(f"    {i+1}s esperando...")
             
-            self.page.remove_listener("response", handle_response)
+            try:
+                self.page.remove_listener("response", handle_response)
+            except:
+                pass
             
             if response_holder["file"]:
                 filename = response_holder["filename"] or "ventas.txt"
                 target_path = DOWNLOAD_DIR / filename
                 with open(target_path, "wb") as f:
                     f.write(response_holder["file"])
-                log(f"✓ Descargado vía HTTP: {filename} ({len(response_holder['file'])} bytes)", "✓")
+                log(f"✓ Guardado: {filename} ({len(response_holder['file'])} bytes)", "✓")
                 return target_path
             
             log("⚠ No se pudo capturar el archivo", "⚠")
