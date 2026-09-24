@@ -179,9 +179,22 @@ class ArumaScraper:
         try: self.playwright.stop()
         except: pass
     
+    def _goto(self, url, intentos=3):
+        """El portal de Aruma a veces tarda >30 s en responder (visto 23-sep-2026):
+        más paciencia y reintentos antes de rendirse."""
+        for i in range(1, intentos + 1):
+            try:
+                self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                return
+            except Exception as e:
+                if i == intentos:
+                    raise
+                log(f"  El portal no respondió (intento {i}/{intentos}): {str(e)[:80]} — reintento en {20*i}s", "⚠")
+                time.sleep(20 * i)
+
     def login(self):
         log("Abriendo página de login...")
-        self.page.goto(LOGIN_URL, wait_until="domcontentloaded")
+        self._goto(LOGIN_URL)
         time.sleep(2)
         log(f"URL actual: {self.page.url}")
         
@@ -234,7 +247,7 @@ class ArumaScraper:
     
     def descargar_ventas(self):
         log("Navegando a Ventas...")
-        self.page.goto(VENTAS_URL, wait_until="domcontentloaded")
+        self._goto(VENTAS_URL)
         time.sleep(3)
         log(f"URL: {self.page.url}")
         
@@ -350,13 +363,21 @@ def enviar_a_sheet(ventas):
     total_rev = sum(v["subtotal"] for v in ventas)
     log(f"Enviando: {len(ventas)} ventas, {len(productos)} productos, {len(dias)} días, {total_uds} uds, ${total_rev:,}", "📤")
     
-    try:
-        res = requests.post(APPS_SCRIPT_URL, json=payload, timeout=180)
-        log(f"Respuesta: {res.status_code} {res.text[:200]}")
-        return res.status_code == 200
-    except Exception as e:
-        log(f"Error enviando: {e}", "⚠")
-        return False
+    # Google Apps Script devuelve 404/5xx en HTML de forma esporádica (18 y 20-sep-2026
+    # se perdió el día por eso): reintentar con espera antes de rendirse.
+    for intento in range(1, 5):
+        try:
+            res = requests.post(APPS_SCRIPT_URL, json=payload, timeout=180)
+            if res.status_code == 200 and not res.text.lstrip().startswith("<"):
+                log(f"Respuesta: {res.status_code} {res.text[:200]}")
+                return True
+            log(f"Apps Script respondió {res.status_code} (intento {intento}/4): {res.text[:80]!r}", "⚠")
+        except Exception as e:
+            log(f"Error enviando (intento {intento}/4): {e}", "⚠")
+        if intento < 4:
+            time.sleep(30 * intento)
+    log("No se pudo enviar al Apps Script tras 4 intentos.", "✗")
+    return False
 
 
 # ════════════════════════════════════════════════════════════════
