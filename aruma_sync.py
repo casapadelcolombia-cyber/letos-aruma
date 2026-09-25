@@ -245,7 +245,21 @@ class ArumaScraper:
             log(f"Error en login: {e}", "⚠")
             return False
     
-    def descargar_ventas(self):
+    def descargar_ventas(self, intentos=3):
+        """El portal de Aruma a veces carga Ventas incompleta (0 campos hidden) y
+        responde 500 al exportar (23, 24 y 25-sep-2026, siempre hacia la 1 PM).
+        Reintentar recargando la página antes de rendirse."""
+        for i in range(1, intentos + 1):
+            archivo = self._descargar_una_vez()
+            if archivo:
+                return archivo
+            if i < intentos:
+                log(f"Descarga fallida (intento {i}/{intentos}); reintento en {30*i}s", "⚠")
+                time.sleep(30 * i)
+        log("No se pudo descargar el archivo de ventas tras varios intentos.", "✗")
+        return None
+
+    def _descargar_una_vez(self):
         log("Navegando a Ventas...")
         self._goto(VENTAS_URL)
         time.sleep(3)
@@ -275,7 +289,11 @@ class ArumaScraper:
                 }
             """)
             log(f"  {len(hidden_fields)} campos hidden")
-            
+            if not hidden_fields:
+                # Sin ViewState el servidor responde 500: la página cargó incompleta.
+                log("  La página de Ventas cargó incompleta (sin campos del formulario)", "⚠")
+                return None
+
             # Agregar el campo del botón Exportar
             hidden_fields["ctl00$MainContent$btnExportar"] = "Exportar"
             
