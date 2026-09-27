@@ -92,8 +92,8 @@
         "mujer_abrigo"
       ],
       "request_id": "313c1598-aead-4e1d-9447-834578611c92",
-      "video_url": null,
-      "estado": "generando",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/fdcda362-352f-4fa1-8521-c9f8f79b15cf.mp4",
+      "estado": "listo",
       "usar": true,
       "prompt": "Pixar-style 3D animated feature film scene, vertical framing. Two characters from the reference images: the FIRST reference image is Maya (keep her exact face, freckles, big hazel eyes, green knit sweater; brassy orange-toned blonde hair with orange roots held up with a tortoiseshell hair clip). The SECOND reference image is the elegant woman in the long dark charcoal wool coat with sleek, glossy ivory-pearl blonde hair (keep her exact look). Setting: the counter of a cozy coffee shop where the barista hands out drinks. Maya stands next to the elegant woman, both waiting for their coffee. Trying to sound casual, Maya smiles and says in Spanish: \"Tu color es divino. ¿Es de salón?\" The woman gives a cool, polite little smile and answers calmly in Spanish: \"Voy donde una especialista. Es privado.\" She takes her coffee cup and walks away. Maya is left blinking, embarrassed. Camera: medium two-shot, then a close-up of Maya's embarrassed face. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting. Audio: two different female voices in Latin American Spanish, Maya warm and nervous, the woman calm and elegant; café ambience, espresso machine hiss.",
       "nota": "Primer intento (226b9ee8-...) rechazado por moderación de Higgsfield; créditos devueltos. Se reescribió el prompt."

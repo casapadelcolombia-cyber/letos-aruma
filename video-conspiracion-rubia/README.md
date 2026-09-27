@@ -29,7 +29,7 @@ Todas son 9:16, 720p, con audio. Ninguna la ha revisado una persona todavía, po
 |---|---|---|---|---|---|
 | 1 | Baño: el matizante falla | 0:00–0:06 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/ec3f6bd5-ae4f-4a3f-8ba9-d3503a58b6c3.mp4) |
 | 2 | Café: todas son rubias perfectas | 0:06–0:12 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/809efe0f-a3c0-4a72-957d-22ceb548828c.mp4) |
-| 3 | La barra: "Voy donde una especialista" | 0:12–0:18 | 6 | Ver `escenas.json` | ver `escenas.json` |
+| 3 | La barra: "Voy donde una especialista" | 0:12–0:18 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/fdcda362-352f-4fa1-8521-c9f8f79b15cf.mp4) |
 | 4 | Los susurros: "Tinte de caja. Trágico." | 0:18–0:24 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/62f89402-cfc9-4cea-bb87-581fbe8115bf.mp4) |
 | 5 | Los mensajes: la mujer escribe mirándola | 0:24–0:30 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/c93795be-67fa-46dc-9c94-073575782585.mp4) |
 | 6 | La persecución por la calle | 0:30–0:37 | 7 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/ad0d5638-625c-4ae5-9d0a-da5d17b68504.mp4) |
@@ -38,7 +38,7 @@ Todas son 9:16, 720p, con audio. Ninguna la ha revisado una persona todavía, po
 | 9 | El remate: "Tenemos una nueva" | 0:50–0:56 | 6 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/a12b7bec-05d4-41a4-9a6d-72f64563fa2e.mp4) |
 | 10 | Cierre con el producto (el texto se pone al unir) | 0:56–1:00 | 4 | Lista | [ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/9ac5089e-377e-4a04-a711-e55828dc0f87.mp4) |
 
-- **Escena 3:** el primer intento lo rechazó la moderación de Higgsfield, que devolvió los créditos. Se reescribió el prompt en términos más neutros y se relanzó. El estado y el link actuales están en `escenas.json`.
+- **Escena 3:** el primer intento lo rechazó la moderación de Higgsfield, que devolvió los créditos. Se reescribió el prompt en términos más neutros y el segundo intento salió bien.
 - **Prueba descartada:** la primera versión de la escena 1, en 480p ([ver](https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/2a800d75-0948-4840-9039-1e70979a99d9.mp4)), no se usa en el final.
 
 ---
@@ -113,13 +113,12 @@ video-conspiracion-rubia/escenas.json de la rama claude/zealous-albattani-m8ti2e
 (si no estás en esa rama: git fetch origin claude/zealous-albattani-m8ti2e && git checkout claude/zealous-albattani-m8ti2e).
 Luego:
 1. Verifica que puedes descargar de d3u0tzju9qaucj.cloudfront.net; si no, avísame.
-2. Si la escena 3 dice "generando", consulta su request_id con estado_video de Higgsfield y actualiza escenas.json.
-3. Descarga las escenas (pip install imageio-ffmpeg pillow && python video-conspiracion-rubia/ensamblar.py --solo-descargar),
+2. Descarga las escenas (pip install imageio-ffmpeg pillow && python video-conspiracion-rubia/ensamblar.py --solo-descargar),
    saca 2-3 fotogramas de cada una y revísalas conmigo: que Maya y la mujer del abrigo se vean iguales en todas,
    que el frasco de Blondz Only se vea bien y que los diálogos en español se entiendan.
-4. Rehaz con Higgsfield (referencia_a_video, 9:16, 720p, con audio) solo las escenas que yo apruebe rehacer,
+3. Rehaz con Higgsfield (referencia_a_video, 9:16, 720p, con audio) solo las escenas que yo apruebe rehacer,
    usando el prompt y las referencias de escenas.json, y actualiza escenas.json.
-5. Arma el video final con python video-conspiracion-rubia/ensamblar.py y envíamelo.
+4. Arma el video final con python video-conspiracion-rubia/ensamblar.py y envíamelo.
 ```
 
 ---
