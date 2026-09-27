@@ -1,0 +1,272 @@
+{
+  "proyecto": "La Conspiración Rubia — anuncio estilo Pixar de 1 minuto para Blondz Only (Girlz Only)",
+  "formato": {
+    "aspect_ratio": "9:16",
+    "resolucion": "720p",
+    "duracion_total_s": 60,
+    "modelo": "Seedance 2.5 vía Higgsfield (referencia_a_video, generate_audio=true)"
+  },
+  "referencias": {
+    "maya_antes": {
+      "url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/a993447f-8910-4f9a-9774-5a106384c1e2.png",
+      "request_id": "ab409da4-bbea-486e-a0c5-7584d274843c",
+      "descripcion": "Maya con el rubio naranja, raíces naranjas y gancho de carey; suéter verde."
+    },
+    "maya_despues": {
+      "url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/bd2c84cf-0119-48f2-8165-884872d61567.png",
+      "request_id": "c48d6c37-d110-4dc4-ba3b-ecc5b7027e43",
+      "descripcion": "Maya con el pelo rubio marfil suelto (edición de maya_antes)."
+    },
+    "mujer_abrigo": {
+      "url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/936bd006-1a29-4e42-bbbb-6f274d9b2480.png",
+      "request_id": "f3ae74a3-dc64-42e8-9f34-f9965aa7aaa5",
+      "descripcion": "La mujer del abrigo: abrigo gris oscuro, rubio marfil liso, siempre con el celular."
+    },
+    "shampoo": {
+      "url": "https://cdn.shopify.com/s/files/1/0072/3776/3172/products/shampoomatizante_2.jpg?v=1620142529",
+      "descripcion": "Foto real: Blondz Only Shampoo Matizante Rubio Marfil 350 ml (Shopify)."
+    },
+    "kit_x2": {
+      "url": "https://cdn.shopify.com/s/files/1/0072/3776/3172/products/kit-x-2.png?v=1626722980",
+      "descripcion": "Foto real: Kit x2 shampoo + mascarilla (Shopify)."
+    },
+    "splash_argan": {
+      "url": "https://cdn.shopify.com/s/files/1/0072/3776/3172/files/06_KIT_X2_RUBIO_MARFIL_producto_splash_argan.png?v=1779550975",
+      "descripcion": "Foto real: kit con splash de aceite de argán (Shopify)."
+    },
+    "swatch_textura": {
+      "url": "https://cdn.shopify.com/s/files/1/0072/3776/3172/files/08_KIT_X2_RUBIO_MARFIL_swatch_textura_azul.png?v=1779550975",
+      "descripcion": "Foto real: color y textura del matizante (Shopify)."
+    }
+  },
+  "escenas": [
+    {
+      "n": 1,
+      "slug": "bano",
+      "titulo": "Baño: el matizante falla",
+      "tiempo": "0:00–0:06",
+      "duracion": 6,
+      "dialogo": [
+        "Maya (susurrando): Esta vez sí… porfa.",
+        "Maya: No, no, no…"
+      ],
+      "referencias": [
+        "maya_antes"
+      ],
+      "request_id": "fd105ff9-d625-4c7c-a1a9-3add5a6ae164",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/ec3f6bd5-ae4f-4a3f-8ba9-d3503a58b6c3.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. The main character is the woman from the reference image (Maya): keep her exact face, freckles, big hazel eyes and green knit sweater. Setting: a tiny, cramped apartment bathroom in the morning, the mirror fogged at the edges, warm light from a small window. Maya stands at the sink facing the mirror with a towel draped over her shoulders. Her hair is completely covered in thick, vivid purple toner foam piled on her head. On the sink: a plain unbranded silver bottle and her phone showing a countdown timer. She stares hard at her reflection, hopeful, and whispers in Spanish: \"Esta vez sí... porfa.\" Then brassy orange streaks visibly seep through the purple foam at her roots. Her face falls in slow, comedic disbelief, eyes widening, and she says in Spanish: \"No, no, no...\" Camera: slow push-in from a medium shot to a close-up of her face in the mirror. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting, whimsical light music. Audio: a young woman's voice speaking Latin American Spanish, soft bathroom ambience, faint timer ticking."
+    },
+    {
+      "n": 2,
+      "slug": "cafe",
+      "titulo": "Café: todas son rubias perfectas",
+      "tiempo": "0:06–0:12",
+      "duracion": 6,
+      "dialogo": [
+        "Maya (para sí): Eso es… demasiado rubio."
+      ],
+      "referencias": [
+        "maya_antes"
+      ],
+      "request_id": "a3b14d71-1ec3-426a-9d81-0c178a247730",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/809efe0f-a3c0-4a72-957d-22ceb548828c.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. The main character is the woman from the reference image (Maya): keep her exact face, freckles, big hazel eyes, green knit sweater and tan tote bag; her brassy orange-toned blonde hair with orange roots is pinned up in a tortoiseshell claw clip. Setting: a cozy neighborhood coffee shop with warm morning light. The door swings open and Maya steps in, then freezes in her tracks: every single customer, at the window, in the corner and at the counter, has the exact same flawless, luminous ivory-pearl blonde hair. In slow motion they all flip their hair at the same time, sparkles glinting, while a heavenly choir sings \"aaah\". Maya's jaw drops and her tote bag strap slides down her arm. She mutters to herself in Spanish: \"Eso es... demasiado rubio.\" Camera: starts behind Maya at the door revealing the room, then cuts to a close-up of her stunned face. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting. Audio: café ambience, door bell, angelic choir sting, a young woman's voice in Latin American Spanish."
+    },
+    {
+      "n": 3,
+      "slug": "barra",
+      "titulo": "La barra: 'Voy donde una especialista'",
+      "tiempo": "0:12–0:18",
+      "duracion": 6,
+      "dialogo": [
+        "Maya: Tu color es divino. ¿Es de salón?",
+        "Mujer: Voy donde una especialista. Es privado."
+      ],
+      "referencias": [
+        "maya_antes",
+        "mujer_abrigo"
+      ],
+      "request_id": "313c1598-aead-4e1d-9447-834578611c92",
+      "video_url": null,
+      "estado": "generando",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. Two characters from the reference images: the FIRST reference image is Maya (keep her exact face, freckles, big hazel eyes, green knit sweater; brassy orange-toned blonde hair with orange roots held up with a tortoiseshell hair clip). The SECOND reference image is the elegant woman in the long dark charcoal wool coat with sleek, glossy ivory-pearl blonde hair (keep her exact look). Setting: the counter of a cozy coffee shop where the barista hands out drinks. Maya stands next to the elegant woman, both waiting for their coffee. Trying to sound casual, Maya smiles and says in Spanish: \"Tu color es divino. ¿Es de salón?\" The woman gives a cool, polite little smile and answers calmly in Spanish: \"Voy donde una especialista. Es privado.\" She takes her coffee cup and walks away. Maya is left blinking, embarrassed. Camera: medium two-shot, then a close-up of Maya's embarrassed face. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting. Audio: two different female voices in Latin American Spanish, Maya warm and nervous, the woman calm and elegant; café ambience, espresso machine hiss.",
+      "nota": "Primer intento (226b9ee8-...) rechazado por moderación de Higgsfield; créditos devueltos. Se reescribió el prompt."
+    },
+    {
+      "n": 4,
+      "slug": "susurros",
+      "titulo": "Los susurros: 'Tinte de caja. Trágico.'",
+      "tiempo": "0:18–0:24",
+      "duracion": 6,
+      "dialogo": [
+        "Rubia 1: ¿Se lo habrá hecho ella sola?",
+        "Rubia 2: Tinte de caja. Trágico."
+      ],
+      "referencias": [
+        "maya_antes"
+      ],
+      "request_id": "cb5f8ac5-3ab6-4c25-a9ae-eb7a28689f33",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/62f89402-cfc9-4cea-bb87-581fbe8115bf.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. The main character is the woman from the reference image (Maya): keep her exact face, freckles, big hazel eyes and green knit sweater; her brassy orange-toned blonde hair with orange roots is pinned up in a tortoiseshell claw clip. Setting: a cozy coffee shop. Maya sits alone at a small table holding a coffee mug. At the next table in the foreground, two women with identical flawless ivory-pearl blonde hair lean toward each other, glance at Maya's orange roots and whisper. The first woman whispers in Spanish: \"¿Se lo habrá hecho ella sola?\" The second woman whispers back, shaking her head: \"Tinte de caja. Trágico.\" Maya slowly sinks down behind her coffee mug as her cheeks turn bright red up to her ears. Camera: rack focus from the two whispering women in the foreground to Maya in the background, then a close-up of Maya hiding behind the mug. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting. Audio: two different female whispering voices in Latin American Spanish, café ambience, a small comedic music sting."
+    },
+    {
+      "n": 5,
+      "slug": "mensajes",
+      "titulo": "Los mensajes: la mujer escribe mirándola",
+      "tiempo": "0:24–0:30",
+      "duracion": 6,
+      "dialogo": [
+        "Maya (pensando): ¿A quién le estás escribiendo de mí?"
+      ],
+      "referencias": [
+        "mujer_abrigo",
+        "maya_antes"
+      ],
+      "request_id": "e950b3bb-8df2-456b-9f6c-edcade7bd5c4",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/c93795be-67fa-46dc-9c94-073575782585.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. Two characters from the reference images: the FIRST reference image is the elegant woman in the long dark charcoal wool coat with sleek, glossy ivory-pearl blonde hair; the SECOND reference image is Maya (exact face, freckles, big hazel eyes, green knit sweater; brassy orange-toned blonde hair with orange roots pinned up in a claw clip). Setting: a cozy coffee shop. Across the room, the elegant woman types furiously on her smartphone with both thumbs, glancing up at Maya's hair, then back down at the screen, again and again. Cut to Maya peeking over her coffee mug, eyes narrowing suspiciously; her inner voice says in Spanish: \"¿A quién le estás escribiendo de mí?\" Suddenly the woman slips her phone into her coat pocket, stands up and heads for the door. Maya springs up from her chair so fast that her full coffee mug wobbles on the table. Expressive Pixar-style facial animation, comedic timing, soft cinematic lighting. Audio: rapid phone typing clicks, suspenseful comedic pizzicato music, Maya's whispered inner voice in Latin American Spanish."
+    },
+    {
+      "n": 6,
+      "slug": "persecucion",
+      "titulo": "La persecución por la calle",
+      "tiempo": "0:30–0:37",
+      "duracion": 7,
+      "dialogo": [
+        "Maya: ¡Shhh!"
+      ],
+      "referencias": [
+        "maya_antes",
+        "mujer_abrigo"
+      ],
+      "request_id": "6adb4830-d9b9-4920-afe0-b58a934af02e",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/ad0d5638-625c-4ae5-9d0a-da5d17b68504.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. Two characters from the reference images: the FIRST reference image is Maya (exact face, freckles, big hazel eyes, green knit sweater, tan tote bag; brassy orange-toned blonde hair with orange roots pinned up in a claw clip); the SECOND reference image is the elegant woman in the long dark charcoal wool coat with sleek, glossy ivory-pearl blonde hair. Setting: a sunny, busy city sidewalk. The elegant woman walks briskly ahead, her glossy blonde hair shining through the crowd. Maya follows about fifteen feet behind in exaggerated spy mode: she hides behind a lamp post that is far too thin to cover her, then ducks behind a city bus that suddenly pulls away and leaves her exposed. A small terrier on a leash barks at her, and she frantically shushes it with a finger to her lips: \"¡Shhh!\" Camera: playful tracking shot along the sidewalk. Expressive Pixar-style animation, slapstick comedic timing, bright cinematic daylight. Audio: spy-comedy music, city traffic, bus engine, small dog barking."
+    },
+    {
+      "n": 7,
+      "slug": "giro",
+      "titulo": "El giro: 'Esta es mi especialista'",
+      "tiempo": "0:37–0:43",
+      "duracion": 6,
+      "dialogo": [
+        "Mujer (guiñando un ojo): Esta es mi especialista."
+      ],
+      "referencias": [
+        "mujer_abrigo",
+        "maya_antes",
+        "shampoo"
+      ],
+      "request_id": "186cc370-f257-49ce-be11-b1f48b6e3fa9",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/b80bee53-959a-4cee-b0ba-657445720cef.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. References: the FIRST reference image is the elegant woman in the long dark charcoal wool coat with sleek, glossy ivory-pearl blonde hair; the SECOND reference image is Maya (exact face, freckles, big hazel eyes, green knit sweater; brassy orange-toned blonde hair with orange roots pinned up in a claw clip); the THIRD reference image is the real Blondz Only toning shampoo bottle. Setting: a quiet street corner. The elegant woman suddenly stops and turns around. Maya freezes mid-step and pretends to read a café menu board. The woman walks up to her, opens her handbag and slowly pulls out the Blondz Only shampoo bottle, holding it up like a precious secret. She winks and says in Spanish: \"Esta es mi especialista.\" The bottle glows with a soft pearly light while a heavenly choir sings. Maya's jaw drops. Keep the bottle's shape, colors, cap and label exactly as in the product reference image; do not invent any text. Expressive Pixar-style facial animation, comedic timing, cinematic lighting. Audio: a record-scratch stop, angelic choir, a cool elegant female voice in Latin American Spanish."
+    },
+    {
+      "n": 8,
+      "slug": "transformacion",
+      "titulo": "La transformación con Blondz Only",
+      "tiempo": "0:43–0:50",
+      "duracion": 7,
+      "dialogo": [
+        "Maya: Por fin."
+      ],
+      "referencias": [
+        "maya_despues",
+        "shampoo",
+        "swatch_textura"
+      ],
+      "request_id": "81fd7eaa-20ea-471c-bfec-5b0c2d7b4d73",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/03d5d6c2-4853-4710-80e4-c1b589f9d73c.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. References: the FIRST reference image is Maya after her transformation (exact face, freckles, big hazel eyes, green knit sweater, and her new luminous, glossy ivory-pearl blonde hair); the SECOND reference image is the real Blondz Only toning shampoo bottle; the THIRD reference image shows the real color and texture of the Blondz Only toner. Setting: the same tiny apartment bathroom with a fogged mirror. Maya lathers the Blondz Only toner into her hair; the foam has exactly the color and texture shown in the third reference image, and the Blondz Only bottle stands on the sink with its label facing the camera. Quick cut: she rinses her hair under the shower. Then, in slow motion, she straightens up and lets her hair fall loose: it is now luminous, glossy ivory-pearl blonde exactly like the first reference image, with no orange at all. The fogged mirror clears by itself, sparkles shimmer, and she smiles at her reflection and says in Spanish: \"Por fin.\" Keep the bottle's shape, colors and label exactly as in the product reference; do not invent any text. Expressive Pixar-style animation, magical cinematic lighting. Audio: water rinse, magical shimmer, uplifting music swell, a young woman's voice in Latin American Spanish."
+    },
+    {
+      "n": 9,
+      "slug": "remate",
+      "titulo": "El remate: 'Tenemos una nueva'",
+      "tiempo": "0:50–0:56",
+      "duracion": 6,
+      "dialogo": [
+        "Maya (susurrando): Tenemos una nueva."
+      ],
+      "referencias": [
+        "maya_despues"
+      ],
+      "request_id": "e9659f2b-b10b-4ba5-9cac-d6661b4cc095",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/a12b7bec-05d4-41a4-9a6d-72f64563fa2e.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Pixar-style 3D animated feature film scene, vertical framing. The main character is Maya from the reference image after her transformation: exact face, freckles, big hazel eyes, green knit sweater, and luminous, glossy ivory-pearl blonde hair worn loose. Setting: the same cozy coffee shop full of customers with flawless ivory-pearl blonde hair. Maya walks in confidently; the blonde customers give her a subtle nod, like members of a secret club, and she nods back. The door opens again: a different young woman with brassy orange-toned blonde hair and orange roots, pinned up in a claw clip, freezes at the entrance, stunned. Maya calmly takes out her phone and starts typing super fast while glancing at the newcomer's hair, then whispers in Spanish with a knowing smile: \"Tenemos una nueva.\" Expressive Pixar-style facial animation, comedic timing, warm cinematic lighting. Audio: café ambience, door bell, playful comedic music, Maya's whisper in Latin American Spanish."
+    },
+    {
+      "n": 10,
+      "slug": "cierre",
+      "titulo": "Cierre con el producto",
+      "tiempo": "0:56–1:00",
+      "duracion": 4,
+      "dialogo": [],
+      "referencias": [
+        "kit_x2",
+        "splash_argan"
+      ],
+      "request_id": "2e9ae0b5-c703-4ed0-8a15-52739bd9ab92",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/9ac5089e-377e-4a04-a711-e55828dc0f87.mp4",
+      "estado": "listo",
+      "usar": true,
+      "prompt": "Premium product closing shot for the end of a Pixar-style 3D animated short, vertical framing. The two Blondz Only bottles (the toning shampoo and the toning mask) shown in the product reference images stand side by side on a pearly white marble surface, lit by soft violet and warm golden light. Slow, elegant camera push-in with a gentle orbit; golden argan oil droplets and tiny pearly sparkles float around the bottles. Keep the bottles' shape, colors, caps and labels exactly as in the product reference images; do not invent any text. Leave clean empty space in the upper third of the frame for a title to be added later. Warm, magical, polished commercial look that matches a Pixar-style film. Audio: a soft magical chime as the music resolves.",
+      "es_cierre": true
+    }
+  ],
+  "cierre": {
+    "lineas": [
+      {
+        "texto": "Blondz Only",
+        "tamano": 92,
+        "y": 90,
+        "aparece": 0.3
+      },
+      {
+        "texto": "Matizante Rubio Marfil",
+        "tamano": 44,
+        "y": 205,
+        "aparece": 0.7
+      },
+      {
+        "texto": "con Aceite de Argán",
+        "tamano": 44,
+        "y": 258,
+        "aparece": 0.7
+      },
+      {
+        "texto": "El secreto ya no es privado.",
+        "tamano": 40,
+        "y": 340,
+        "aparece": 1.3
+      }
+    ]
+  },
+  "pruebas": [
+    {
+      "escena": 1,
+      "resolucion": "480p",
+      "request_id": "02817a1b-d107-4a59-b504-ace0a1a2036a",
+      "video_url": "https://d3u0tzju9qaucj.cloudfront.net/22af5e29-f0ce-49b1-a2ec-f098dd8a2f7c/2a800d75-0948-4840-9039-1e70979a99d9.mp4",
+      "nota": "Prueba inicial; no se usa en el final."
+    }
+  ]
+}
